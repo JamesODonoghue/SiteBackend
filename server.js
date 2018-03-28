@@ -14,8 +14,13 @@ app.get('/login', function(req, res) {
       response_type: 'code',
       client_id: process.env.SPOTIFY_CLIENT_ID,
       scope: 'user-read-private user-read-email',
+      scope: 'user-read-private user-read-email user-top-read',
       redirect_uri
     }))
+})
+
+app.get('/logout', function(req, res) {
+  res.redirect('https://accounts.spotify.com/logout')
 })
 
 app.get('/callback', function(req, res) {
