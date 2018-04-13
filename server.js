@@ -47,7 +47,7 @@ app.get('/callback', function(req, res) {
 
 // app.use(express.static('assets'));
 
-app.use('/assets',express.static(__dirname + '/assets'));
+app.use('/assets',express.static(path.join(_dirname + '/assets')));
 
 
 let port = process.env.PORT || 8080
