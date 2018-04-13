@@ -4,9 +4,6 @@ let querystring = require('querystring')
 
 let app = express()
 
-var client_id = 'ceb9be711d7d46d8bdec35c613d38016'; // Your client id
-var client_secret = '655b744453bb4c05867d29aba824a9f5'; // Your secret
-
 let redirect_uri = 
   process.env.REDIRECT_URI || 
   'http://localhost:8080/callback'
