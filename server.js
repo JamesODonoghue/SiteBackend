@@ -1,7 +1,10 @@
 let express = require('express')
 let request = require('request')
 let querystring = require('querystring')
-let path = require('path');
+let path = require('path')
+
+require('dotenv').config();
+
 
 let app = express()
 
@@ -13,7 +16,7 @@ app.get('/login', function(req, res) {
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
-      client_id: process.env.SPOTIFY_CLIENT_ID || client_id,
+      client_id: process.env.SPOTIFY_CLIENT_ID || process.env.CLIENT_ID,
       scope: 'user-read-private user-read-email user-top-read',
       redirect_uri
     }))
@@ -34,7 +37,7 @@ app.get('/callback', function(req, res) {
     },
     headers: {
       'Authorization': 'Basic ' + (new Buffer(
-        (process.env.SPOTIFY_CLIENT_ID || client_id) + ':' + (process.env.SPOTIFY_CLIENT_SECRET || client_secret)
+        (process.env.SPOTIFY_CLIENT_ID || process.env.CLIENT_ID) + ':' + (process.env.SPOTIFY_CLIENT_SECRET || process.env.CLIENT_SECRET)
       ).toString('base64'))
     },
     json: true
