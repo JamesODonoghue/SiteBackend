@@ -1,16 +1,29 @@
 let express = require('express')
 let request = require('request')
 let querystring = require('querystring')
+let compression = require('compression');
 let path = require('path')
 
 require('dotenv').config();
 
 
-let app = express()
-
 let redirect_uri = 
   process.env.REDIRECT_URI || 
   'http://localhost:8080/callback'
+
+
+let app = express()
+
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  
+  next();
+});
+
+app.use(compression());
+
 
 app.get('/login', function(req, res) {
   res.redirect('https://accounts.spotify.com/authorize?' +
